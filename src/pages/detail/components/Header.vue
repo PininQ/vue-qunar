@@ -46,7 +46,12 @@ export default {
     }
   },
   activated () {
+    // scroll 事件绑定在 window 全局对象上，在其它页面进行滚动也会受到影响，需要对该事件进行解绑
     window.addEventListener('scroll', this.handleScroll)
+  },
+  deactivated () {
+    // 在页面即将被隐藏或者即将被替换成新页面时执行，需要在详情页隐藏时对全局事件进行解绑
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
